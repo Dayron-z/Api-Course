@@ -38,6 +38,4 @@ public class Course {
     private List<Enrollment> enrollments;
 
 
-
-
 }

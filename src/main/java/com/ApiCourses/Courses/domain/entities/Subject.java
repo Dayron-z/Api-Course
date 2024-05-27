@@ -32,6 +32,4 @@ public class Subject {
     @EqualsAndHashCode.Exclude
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = false, cascade = CascadeType.ALL, mappedBy = "subject")
     private List<Submission> submissions;
-
-
 }
