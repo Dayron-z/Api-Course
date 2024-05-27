@@ -45,10 +45,16 @@ public class UserEntity {
     private List<Enrollment> enrollments;
 
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false, mappedBy = "sender")
+    private List<Message> sentMessages;
 
 
-
-
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false, mappedBy = "receiver")
+    private List<Message> receivedMessages;
 
 
 

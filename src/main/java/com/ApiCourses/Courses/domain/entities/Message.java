@@ -24,4 +24,20 @@ public class Message {
     private String message;
     @Column(nullable = false)
     private LocalDateTime date;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sender_id", referencedColumnName = "id")
+    private UserEntity sender;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "receiver_id", referencedColumnName = "id")
+    private UserEntity receiver;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id", referencedColumnName = "id")
+    private Course course;
+
+
 }

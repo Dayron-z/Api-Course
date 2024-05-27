@@ -20,10 +20,9 @@ public class Course {
     @Column(nullable = false)
     @Lob
     private String description;
-    @Column(nullable = false)
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name =  "instructor_id" ,referencedColumnName = "id")
+    @JoinColumn(name =  "instructor_id" , referencedColumnName = "id")
     private UserEntity user;
 
 
