@@ -39,6 +39,17 @@ public class UserEntity {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false, mappedBy = "user")
     private List<Submission> submissions;
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false, mappedBy = "user")
+    private List<Enrollment> enrollments;
+
+
+
+
+
+
+
 
 
 

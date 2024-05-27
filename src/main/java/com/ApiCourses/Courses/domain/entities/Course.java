@@ -31,4 +31,14 @@ public class Course {
     @ToString.Exclude
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,  orphanRemoval = false, mappedBy = "course")
     private List<Lesson> lessons;
+
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,  orphanRemoval = false, mappedBy = "course")
+    private List<Enrollment> enrollments;
+
+
+
+
 }
