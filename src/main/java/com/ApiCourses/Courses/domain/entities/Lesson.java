@@ -31,6 +31,6 @@ public class Lesson {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = false, mappedBy = "lesson")
-    private List<Subjects> subjects;
+    private List<Subject> subjects;
 
 }
