@@ -57,7 +57,4 @@ public class UserEntity {
     private List<Message> receivedMessages;
 
 
-
-
-
 }
