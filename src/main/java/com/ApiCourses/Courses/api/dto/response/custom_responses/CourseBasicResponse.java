@@ -1,6 +1,6 @@
-package com.ApiCourses.Courses.api.dto.response;
+package com.ApiCourses.Courses.api.dto.response.custom_responses;
 
-import com.ApiCourses.Courses.domain.entities.Lesson;
+import com.ApiCourses.Courses.api.dto.response.used_responses.EnrollmentResponse;
 import com.ApiCourses.Courses.domain.entities.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,5 +20,5 @@ public class CourseBasicResponse {
     /*Por revisar*/
     private UserEntity user;
     /*Por revisar*/
-    private List<LessonResponse> lessons;
+    private List<EnrollmentResponse> enrollments;
 }

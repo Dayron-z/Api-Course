@@ -1,7 +1,6 @@
-package com.ApiCourses.Courses.api.dto.response;
+package com.ApiCourses.Courses.api.dto.response.used_responses;
 
-import com.ApiCourses.Courses.domain.entities.Course;
-import com.ApiCourses.Courses.domain.entities.Subject;
+import com.ApiCourses.Courses.api.dto.response.custom_responses.CourseBasicResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +17,7 @@ public class LessonResponse {
     private String lessonTitle;
     private String content;
     /*Por revisar*/
-    private CourseResponse course;
+    private CourseBasicResponse course;
     /*Por revisar*/
     private List<SubjectResponse> subjects;
 }
