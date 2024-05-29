@@ -1,8 +1,8 @@
 package com.ApiCourses.Courses.api.dto.response.used_responses;
 
 
-import com.ApiCourses.Courses.api.dto.response.custom_responses.CourseBasicResponse;
-import com.ApiCourses.Courses.domain.entities.UserEntity;
+import com.ApiCourses.Courses.api.dto.response.custom_responses.CourseBasicResponseToSpecificResponse;
+import com.ApiCourses.Courses.api.dto.response.custom_responses.UserBasicResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,8 +17,6 @@ import java.time.LocalDateTime;
 public class EnrollmentResponse {
     private Long id;
     private LocalDateTime enrollmentDate;
-    /*Por revisar*/
-    private UserEntity user;
-    private CourseBasicResponse course;
-
+    private UserBasicResponse user;
+    private CourseBasicResponseToSpecificResponse course;
 }
