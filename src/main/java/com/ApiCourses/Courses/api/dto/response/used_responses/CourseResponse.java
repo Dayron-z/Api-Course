@@ -22,7 +22,13 @@ public class CourseResponse {
     private String courseName;
     private String description;
     private UserBasicResponse instructor;
+
+
+    /*Se cambia*/
     private List<LessonBasicResponse> lessons;
+
+
+
     private List<EnrollmentBasicResponse> enrollments;
     private List<MessageBasicResponse> messages;
 }
