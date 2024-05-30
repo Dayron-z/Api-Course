@@ -1,6 +1,7 @@
 package com.ApiCourses.Courses.infrastructure.abstract_services;
 
 
+import com.ApiCourses.Courses.utils.enums.SortType;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,5 @@ public interface CrudService<RQ,RS, ID>{
     public RS get(ID id);
     public RS update(RQ request, ID id);
     public void delete(ID id);
-    public Page<RS> getAll(int page, int size, )
-
-
+    public Page<RS> getAll(int page, int size, SortType sort);
 }
