@@ -1,6 +1,7 @@
 package com.ApiCourses.Courses.api.dto.response.used_responses;
 
 
+import com.ApiCourses.Courses.api.dto.response.custom_responses.CourseBasicResponse;
 import com.ApiCourses.Courses.api.dto.response.custom_responses.CourseBasicResponseToSpecificResponse;
 import com.ApiCourses.Courses.api.dto.response.custom_responses.UserBasicResponse;
 import lombok.AllArgsConstructor;

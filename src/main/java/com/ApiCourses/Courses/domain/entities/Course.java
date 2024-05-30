@@ -37,5 +37,9 @@ public class Course {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,  orphanRemoval = false, mappedBy = "course")
     private List<Enrollment> enrollments;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL,  orphanRemoval = false, mappedBy = "course")
+    private List<Message> messages;
 
 }

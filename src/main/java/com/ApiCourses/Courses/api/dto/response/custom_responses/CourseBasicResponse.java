@@ -17,7 +17,10 @@ public class CourseBasicResponse {
     private Long id;
     private String courseName;
     private String description;
-    /*Por revisar*/
-    private UserEntity user;
+    private UserBasicResponse user;
+    private List<MessageBasicResponse> messages;
     private List<EnrollmentBasicResponse> enrollments;
 }
+
+
+

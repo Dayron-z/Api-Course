@@ -16,5 +16,5 @@ import java.time.LocalDateTime;
 public class EnrollmentBasicResponse {
     private Long id;
     private LocalDateTime enrollmentDate;
-    private UserEntity user;
+    private UserBasicResponse user;
 }

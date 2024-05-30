@@ -14,5 +14,5 @@ public class CourseBasicResponseToSpecificResponse {
     private Long id;
     private String courseName;
     private String description;
-    private UserResponse user;
+    private UserBasicResponse user;
 }
