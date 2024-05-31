@@ -30,10 +30,6 @@ public class CourseService implements ICourseService {
     private final CourseRepository courseRepository;
     @Autowired
     private final UserRepository userRepository;
-
-
-
-
     @Override
     public CourseResponse create(CourseRequest request) {
         Course course = this.requestToEntity(request);
@@ -62,9 +58,9 @@ public class CourseService implements ICourseService {
     }
     @Override
     public void delete(Long id) {
-
+        Course course = this.find(id);
+        this.courseRepository.delete(course);
     }
-
     @Override
     public Page<CourseResponse> getAll(int page, int size, SortType sort) {
 
