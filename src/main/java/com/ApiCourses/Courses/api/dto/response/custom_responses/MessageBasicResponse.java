@@ -15,3 +15,5 @@ public class MessageBasicResponse {
     private UserBasicResponse sender;
     private UserBasicResponse receiver;
 }
+
+

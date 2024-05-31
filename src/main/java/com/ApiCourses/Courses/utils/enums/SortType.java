@@ -1,5 +1,5 @@
 package com.ApiCourses.Courses.utils.enums;
 
 public enum SortType {
-    ASC, DESC
+    ASC, NONE, DESC
 }

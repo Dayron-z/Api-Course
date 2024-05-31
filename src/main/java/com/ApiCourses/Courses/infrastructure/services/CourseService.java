@@ -5,13 +5,19 @@ import com.ApiCourses.Courses.api.dto.request.CourseRequest;
 import com.ApiCourses.Courses.api.dto.response.custom_responses.*;
 import com.ApiCourses.Courses.api.dto.response.used_responses.CourseResponse;
 import com.ApiCourses.Courses.domain.entities.*;
+import com.ApiCourses.Courses.domain.repositories.CourseRepository;
 import com.ApiCourses.Courses.infrastructure.abstract_services.ICourseService;
 import com.ApiCourses.Courses.utils.enums.SortType;
+import com.ApiCourses.Courses.utils.exceptions.BadRequestException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,21 +25,27 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class CourseService implements ICourseService {
 
+
+    @Autowired
+    private final CourseRepository courseRepository;
+
     @Override
     public CourseResponse create(CourseRequest request) {
+        Course course = this.requestToEntity(request);
+        course.setLessons(new ArrayList<>());
+        course.setEnrollments(new ArrayList<>());
+        course.setMessages(new ArrayList<>());
+
         return null;
     }
-
     @Override
     public CourseResponse get(Long id) {
-        return null;
+        return this.entityToResponse(this.find(id));
     }
-
     @Override
     public CourseResponse update(CourseRequest request, Long id) {
         return null;
     }
-
     @Override
     public void delete(Long id) {
 
@@ -41,10 +53,31 @@ public class CourseService implements ICourseService {
 
     @Override
     public Page<CourseResponse> getAll(int page, int size, SortType sort) {
-        return null;
+
+        if (page < 0){
+            page = 0;
+        }
+
+        PageRequest pagination = null;
+
+        switch (sort){
+            case NONE -> pagination = PageRequest.of(page, size);
+            case ASC -> pagination = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC));
+            case DESC -> pagination = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC));
+        }
+
+
+        return this.courseRepository.findAll(pagination).map(this::entityToResponse);
     }
-
-
+    private Course find(Long id){
+        return this.courseRepository.findById(id).orElseThrow(()-> new BadRequestException("There are no courses with the id provided"));
+    }
+    private Course requestToEntity(CourseRequest courseRequest){
+        return Course.builder()
+                .courseName(courseRequest.getCourseName())
+                .description(courseRequest.getDescription())
+                .build();
+    }
     private CourseResponse entityToResponse(Course course){
         //Convertimos los atributos que están customizados
         UserBasicResponse instructor = new UserBasicResponse();
@@ -67,13 +100,8 @@ public class CourseService implements ICourseService {
                 .lessons(lessons)
                 .enrollments(enrollments)
                 .messages(messages)
-
                 .build();
     }
-
-
-
-
     private MessageBasicResponse entityToMessageResponse(Message message){
         //Convertimos los atributos que están customizados
         UserBasicResponse sender = new UserBasicResponse();
@@ -95,7 +123,6 @@ public class CourseService implements ICourseService {
     private EnrollmentBasicResponse entityToEnrollmentResponse(Enrollment enrollment) {
         UserBasicResponse student = new UserBasicResponse();
         BeanUtils.copyProperties(enrollment.getUser(), student);
-
 
 
         return EnrollmentBasicResponse.builder()
