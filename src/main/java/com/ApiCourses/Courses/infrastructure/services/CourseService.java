@@ -65,6 +65,8 @@ public class CourseService implements ICourseService {
                 .description(course.getDescription())
                 .instructor(instructor)
                 .lessons(lessons)
+                .enrollments(enrollments)
+                .messages(messages)
 
                 .build();
     }
