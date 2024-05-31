@@ -6,6 +6,7 @@ import com.ApiCourses.Courses.api.dto.response.custom_responses.*;
 import com.ApiCourses.Courses.api.dto.response.used_responses.CourseResponse;
 import com.ApiCourses.Courses.domain.entities.*;
 import com.ApiCourses.Courses.domain.repositories.CourseRepository;
+import com.ApiCourses.Courses.domain.repositories.UserRepository;
 import com.ApiCourses.Courses.infrastructure.abstract_services.ICourseService;
 import com.ApiCourses.Courses.utils.enums.SortType;
 import com.ApiCourses.Courses.utils.exceptions.BadRequestException;
@@ -25,9 +26,13 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class CourseService implements ICourseService {
 
-
     @Autowired
     private final CourseRepository courseRepository;
+    @Autowired
+    private final UserRepository userRepository;
+
+
+
 
     @Override
     public CourseResponse create(CourseRequest request) {
@@ -35,8 +40,9 @@ public class CourseService implements ICourseService {
         course.setLessons(new ArrayList<>());
         course.setEnrollments(new ArrayList<>());
         course.setMessages(new ArrayList<>());
-
-        return null;
+        course.setUser(this.userRepository.findById(request.getId()).orElseThrow(()->
+                new BadRequestException("There are no users with the id provided")));
+        return this.entityToResponse(this.courseRepository.save(course));
     }
     @Override
     public CourseResponse get(Long id) {
@@ -44,7 +50,15 @@ public class CourseService implements ICourseService {
     }
     @Override
     public CourseResponse update(CourseRequest request, Long id) {
-        return null;
+        Course course = this.find(id);
+
+        Course updatedCourse = this.requestToEntity(request);
+        updatedCourse.setId(id);
+        updatedCourse.setUser(course.getUser());
+
+
+        return this.entityToResponse(this.courseRepository.save(updatedCourse));
+
     }
     @Override
     public void delete(Long id) {
@@ -66,8 +80,7 @@ public class CourseService implements ICourseService {
             case DESC -> pagination = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC));
         }
 
-
-        return this.courseRepository.findAll(pagination).map(this::entityToResponse);
+        return this.courseRepository.findAll(pagination).map(course -> this.entityToResponse(course));
     }
     private Course find(Long id){
         return this.courseRepository.findById(id).orElseThrow(()-> new BadRequestException("There are no courses with the id provided"));
