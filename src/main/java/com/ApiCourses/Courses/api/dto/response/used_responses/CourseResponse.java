@@ -24,9 +24,7 @@ public class CourseResponse {
     private UserBasicResponse instructor;
 
 
-    /*Se cambia*/
     private List<LessonBasicResponse> lessons;
-
 
 
     private List<EnrollmentBasicResponse> enrollments;

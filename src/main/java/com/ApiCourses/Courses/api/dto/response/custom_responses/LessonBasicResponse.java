@@ -16,5 +16,5 @@ public class LessonBasicResponse {
     private Long id;
     private String lessonTitle;
     private String content;
-    private List<SubjectResponse> subjects;
+    private List<SubjectBasicResponse> subjects;
 }
