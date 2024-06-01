@@ -10,6 +10,8 @@ import com.ApiCourses.Courses.utils.exceptions.BadRequestException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,6 +28,12 @@ public class UserService implements IUserService {
 
     @Override
     public UserResponse get(Long id) {
+
+
+
+
+
+
         return null;
     }
 
@@ -41,6 +49,21 @@ public class UserService implements IUserService {
 
     @Override
     public Page<UserResponse> getAll(int page, int size, SortType sort) {
+
+        if (page < 0){
+            page = 0;
+        }
+
+        PageRequest pagination = null;
+
+        switch (sort){
+            case NONE -> pagination = PageRequest.of(page, size);
+            // FIELD_BY_SORT is just an attribute in the interface that contains a string with the name of an entity attribute.
+            // We use this attribute name to sort the results according to that rule.
+            case ASC ->  pagination = PageRequest.of(page, size, Sort.by(FIELD_BY_SORT).ascending());
+            case DESC -> pagination = PageRequest.of(page, size, Sort.by(FIELD_BY_SORT).descending());
+        }
+
         return null;
     }
 
@@ -48,6 +71,14 @@ public class UserService implements IUserService {
 
     private UserEntity find(Long id){
         return this.userRepository.findById(id).orElseThrow(()-> new BadRequestException("There are no users with the id provided"));
+    }
+
+    private UserResponse EntityToResponse(UserEntity user){
+        UserResponse.builder()
+
+
+                .build();
+
     }
 
 

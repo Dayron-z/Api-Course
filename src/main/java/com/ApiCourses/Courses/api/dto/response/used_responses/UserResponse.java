@@ -1,5 +1,6 @@
 package com.ApiCourses.Courses.api.dto.response.used_responses;
 
+import com.ApiCourses.Courses.api.dto.response.custom_responses.*;
 import com.ApiCourses.Courses.domain.entities.Submission;
 import com.ApiCourses.Courses.utils.enums.Role;
 import lombok.AllArgsConstructor;
@@ -19,9 +20,11 @@ public class UserResponse {
     private String email;
     private String fullName;
     private Role role;
-    private List<SubmissionResponse> submissions;
-    private List<CourseResponse> courses;
-    private List<EnrollmentResponse> enrollments;
-    private List<MessageResponse> sentMessages;
-    private List<MessageResponse> receivedMessages;
+    /*Listo*/
+    private List<SubmissionBasicResponseToUser> submissions;
+    /*Listo*/
+    private List<CourseBasicResponse> courses;
+    private List<EnrollmentBasicResponseToUser> enrollments;
+    private List<MessageBasicResponse> sentMessages;
+    private List<MessageBasicResponse> receivedMessages;
 }

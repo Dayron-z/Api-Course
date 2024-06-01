@@ -1,6 +1,5 @@
 package com.ApiCourses.Courses.api.dto.response.custom_responses;
 
-import com.ApiCourses.Courses.api.dto.response.used_responses.UserResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,9 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CourseBasicResponseToSpecificResponse {
+public class SubmissionBasicResponseToUser {
     private Long id;
-    private String courseName;
-    private String description;
-    private UserBasicResponse instructor;
+    private String content;
+    private Double grade;
+    private SubjectBasicResponse subject;
 }

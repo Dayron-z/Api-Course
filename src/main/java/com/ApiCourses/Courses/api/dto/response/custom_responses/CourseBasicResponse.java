@@ -17,7 +17,7 @@ public class CourseBasicResponse {
     private Long id;
     private String courseName;
     private String description;
-    private UserBasicResponse user;
+    private UserBasicResponse instructor;
     private List<MessageBasicResponse> messages;
     private List<EnrollmentBasicResponse> enrollments;
 }
