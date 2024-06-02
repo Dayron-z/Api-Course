@@ -4,6 +4,7 @@ import com.ApiCourses.Courses.api.dto.request.LessonRequest;
 import com.ApiCourses.Courses.api.dto.request.UpdateLessonRequest;
 import com.ApiCourses.Courses.api.dto.request.UserRequest;
 import com.ApiCourses.Courses.api.dto.response.custom_responses.*;
+import com.ApiCourses.Courses.api.dto.response.used_responses.CourseResponse;
 import com.ApiCourses.Courses.api.dto.response.used_responses.LessonResponse;
 import com.ApiCourses.Courses.domain.entities.*;
 import com.ApiCourses.Courses.domain.repositories.CourseRepository;
@@ -16,6 +17,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -58,6 +61,7 @@ public class LessonService implements ILessonService {
 
         return this.entityToResponse( this.lessonRepository.save(updatedLesson));
     }
+
     @Override
     public void delete(Long id) {
         Lesson lesson = this.find(id);
@@ -67,6 +71,52 @@ public class LessonService implements ILessonService {
     public Page<LessonResponse> getAll(int page, int size, SortType sort) {
         return null;
     }
+
+
+    public CourseResponseToLessons findByCourse(Long id){
+        Course course =  this.courseRepository.findById(id).orElseThrow(()-> new BadRequestException("There are no courses with the id provided"));
+        return  this.courseToCourseResponse(course);
+
+    }
+
+    private CourseResponseToLessons courseToCourseResponse(Course course){
+        List<LessonBasicResponse> lessons = course.getLessons().stream().map(lesson -> this.entityToCustomLessonResponse(lesson)).collect(Collectors.toList());
+
+        return CourseResponseToLessons.builder()
+                .id(course.getId())
+                .courseName(course.getCourseName())
+                .description(course.getDescription())
+                .lessons(lessons)
+                .build();
+    }
+
+    private LessonBasicResponse entityToCustomLessonResponse(Lesson lesson){
+
+        List<SubjectBasicResponse> subjects =  lesson.getSubjects().stream().map( subject -> this.entityToLessonResponse(subject)).collect(Collectors.toList());
+
+
+        return LessonBasicResponse.builder()
+                .id(lesson.getId())
+                .lessonTitle(lesson.getLessonTitle())
+                .content(lesson.getContent())
+                .subjects(subjects)
+                .build();
+
+    }
+    private SubjectBasicResponse entityToLessonResponse(Subject subject){
+
+       return SubjectBasicResponse.builder()
+                .id(subject.getId())
+                .subjectTitle(subject.getSubjectTitle())
+                .text(subject.getText())
+                .dueDate(subject.getDueDate())
+                .build();
+    }
+
+
+
+
+
     private Lesson requestToEntity(LessonRequest lessonRequest){
         return Lesson.builder()
                 .lessonTitle(lessonRequest.getLessonTitle())

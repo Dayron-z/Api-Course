@@ -52,7 +52,6 @@ public class CourseController {
         return ResponseEntity.ok(this.courseService.update(courseRequest, id));
     }
 
-
     @PostMapping
     public ResponseEntity<CourseResponse> create(@Validated @RequestBody CourseRequest courseRequest){
         return ResponseEntity.ok(this.courseService.create(courseRequest));
