@@ -13,9 +13,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SubjectRequest {
-    @NotNull(message = "The id is required.")
-    private Long id;
-
     @NotBlank(message = "The subject title cannot be blank.")
     private String subjectTitle;
 

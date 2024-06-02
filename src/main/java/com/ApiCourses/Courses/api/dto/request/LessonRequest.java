@@ -13,10 +13,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LessonRequest {
-
-    @NotNull(message = "The id is required.")
-    private Long id;
-
     @NotBlank(message = "The lesson title cannot be blank.")
     @Size(max = 100, message = "The lesson title must not exceed 100 characters.")
     private String lessonTitle;

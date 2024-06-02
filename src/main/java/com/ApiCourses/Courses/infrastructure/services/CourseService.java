@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class CourseService implements ICourseService {
-
     @Autowired
     private final CourseRepository courseRepository;
     @Autowired
@@ -36,7 +35,7 @@ public class CourseService implements ICourseService {
         course.setLessons(new ArrayList<>());
         course.setEnrollments(new ArrayList<>());
         course.setMessages(new ArrayList<>());
-        course.setUser(this.userRepository.findById(request.getId()).orElseThrow(()->
+        course.setUser(this.userRepository.findById(request.getInstructorId()).orElseThrow(()->
                 new BadRequestException("There are no users with the id provided")));
         return this.entityToResponse(this.courseRepository.save(course));
     }
@@ -47,11 +46,12 @@ public class CourseService implements ICourseService {
     @Override
     public CourseResponse update(CourseRequest request, Long id) {
         Course course = this.find(id);
-
         Course updatedCourse = this.requestToEntity(request);
         updatedCourse.setId(id);
+        updatedCourse.setLessons(course.getLessons());
+        updatedCourse.setEnrollments(course.getEnrollments());
+        updatedCourse.setMessages(course.getMessages());
         updatedCourse.setUser(course.getUser());
-
 
         return this.entityToResponse(this.courseRepository.save(updatedCourse));
 

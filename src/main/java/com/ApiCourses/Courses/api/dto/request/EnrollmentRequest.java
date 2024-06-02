@@ -14,9 +14,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EnrollmentRequest {
-    @NotNull(message = "The id is required.")
-    private Long id;
-
     @NotNull(message = "The user ID is required.")
     private Long userId;
 

@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserRequest {
-    private Long id;
 
     @NotBlank(message = "Username is required.")
     @Size(max = 50, message = "Username must not exceed {max} characters.")
