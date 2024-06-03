@@ -1,15 +1,12 @@
 package com.ApiCourses.Courses.infrastructure.services;
 
-import com.ApiCourses.Courses.api.dto.request.LessonRequest;
-import com.ApiCourses.Courses.api.dto.request.UpdateLessonRequest;
-import com.ApiCourses.Courses.api.dto.request.UserRequest;
+import com.ApiCourses.Courses.api.dto.request.used_request.LessonRequest;
+import com.ApiCourses.Courses.api.dto.request.custom_request.UpdateLessonRequest;
 import com.ApiCourses.Courses.api.dto.response.custom_responses.*;
-import com.ApiCourses.Courses.api.dto.response.used_responses.CourseResponse;
 import com.ApiCourses.Courses.api.dto.response.used_responses.LessonResponse;
 import com.ApiCourses.Courses.domain.entities.*;
 import com.ApiCourses.Courses.domain.repositories.CourseRepository;
 import com.ApiCourses.Courses.domain.repositories.LessonRepository;
-import com.ApiCourses.Courses.infrastructure.abstract_services.ICourseService;
 import com.ApiCourses.Courses.infrastructure.abstract_services.ILessonService;
 import com.ApiCourses.Courses.utils.enums.SortType;
 import com.ApiCourses.Courses.utils.exceptions.BadRequestException;
@@ -17,8 +14,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,7 +29,6 @@ public class LessonService implements ILessonService {
     private final CourseRepository courseRepository;
     @Override
     public LessonResponse create(LessonRequest request) {
-
         Course course = this.courseRepository.findById(request.getCourseId()).orElseThrow(() -> new BadRequestException("There are no courses with the id provided"));
 
         Lesson lesson = this.requestToEntity(request);
@@ -71,14 +65,11 @@ public class LessonService implements ILessonService {
     public Page<LessonResponse> getAll(int page, int size, SortType sort) {
         return null;
     }
-
-
     public CourseResponseToLessons findByCourse(Long id){
         Course course =  this.courseRepository.findById(id).orElseThrow(()-> new BadRequestException("There are no courses with the id provided"));
         return  this.courseToCourseResponse(course);
 
     }
-
     private CourseResponseToLessons courseToCourseResponse(Course course){
         List<LessonBasicResponse> lessons = course.getLessons().stream().map(lesson -> this.entityToCustomLessonResponse(lesson)).collect(Collectors.toList());
 
@@ -89,7 +80,6 @@ public class LessonService implements ILessonService {
                 .lessons(lessons)
                 .build();
     }
-
     private LessonBasicResponse entityToCustomLessonResponse(Lesson lesson){
 
         List<SubjectBasicResponse> subjects =  lesson.getSubjects().stream().map( subject -> this.entityToLessonResponse(subject)).collect(Collectors.toList());
@@ -112,11 +102,6 @@ public class LessonService implements ILessonService {
                 .dueDate(subject.getDueDate())
                 .build();
     }
-
-
-
-
-
     private Lesson requestToEntity(LessonRequest lessonRequest){
         return Lesson.builder()
                 .lessonTitle(lessonRequest.getLessonTitle())

@@ -1,6 +1,6 @@
 package com.ApiCourses.Courses.infrastructure.services;
 
-import com.ApiCourses.Courses.api.dto.request.UserRequest;
+import com.ApiCourses.Courses.api.dto.request.used_request.UserRequest;
 import com.ApiCourses.Courses.api.dto.response.custom_responses.*;
 import com.ApiCourses.Courses.api.dto.response.used_responses.UserResponse;
 import com.ApiCourses.Courses.domain.entities.*;
@@ -12,8 +12,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

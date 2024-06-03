@@ -1,7 +1,7 @@
 package com.ApiCourses.Courses.api.controllers;
 
 
-import com.ApiCourses.Courses.api.dto.request.UserRequest;
+import com.ApiCourses.Courses.api.dto.request.used_request.UserRequest;
 import com.ApiCourses.Courses.api.dto.response.used_responses.UserResponse;
 import com.ApiCourses.Courses.infrastructure.abstract_services.IUserService;
 import lombok.AllArgsConstructor;

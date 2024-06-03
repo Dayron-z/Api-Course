@@ -1,4 +1,4 @@
-package com.ApiCourses.Courses.api.dto.request;
+package com.ApiCourses.Courses.api.dto.request.used_request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

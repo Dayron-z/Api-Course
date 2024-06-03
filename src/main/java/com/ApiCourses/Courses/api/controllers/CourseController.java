@@ -2,10 +2,8 @@ package com.ApiCourses.Courses.api.controllers;
 
 
 
-import com.ApiCourses.Courses.api.dto.request.CourseRequest;
-import com.ApiCourses.Courses.api.dto.request.UserRequest;
+import com.ApiCourses.Courses.api.dto.request.used_request.CourseRequest;
 import com.ApiCourses.Courses.api.dto.response.used_responses.CourseResponse;
-import com.ApiCourses.Courses.api.dto.response.used_responses.UserResponse;
 import com.ApiCourses.Courses.infrastructure.abstract_services.ICourseService;
 import com.ApiCourses.Courses.utils.enums.SortType;
 import lombok.AllArgsConstructor;

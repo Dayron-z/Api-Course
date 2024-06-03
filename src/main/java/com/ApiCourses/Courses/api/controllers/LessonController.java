@@ -1,14 +1,11 @@
 package com.ApiCourses.Courses.api.controllers;
 
 
-import com.ApiCourses.Courses.api.dto.request.LessonRequest;
-import com.ApiCourses.Courses.api.dto.request.UpdateLessonRequest;
-import com.ApiCourses.Courses.api.dto.request.UserRequest;
+import com.ApiCourses.Courses.api.dto.request.used_request.LessonRequest;
+import com.ApiCourses.Courses.api.dto.request.custom_request.UpdateLessonRequest;
 import com.ApiCourses.Courses.api.dto.response.custom_responses.CourseResponseToLessons;
 import com.ApiCourses.Courses.api.dto.response.used_responses.LessonResponse;
-import com.ApiCourses.Courses.api.dto.response.used_responses.UserResponse;
 import com.ApiCourses.Courses.infrastructure.abstract_services.ILessonService;
-import com.ApiCourses.Courses.infrastructure.abstract_services.IUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

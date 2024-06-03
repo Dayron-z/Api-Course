@@ -1,7 +1,7 @@
 package com.ApiCourses.Courses.infrastructure.services;
 
 
-import com.ApiCourses.Courses.api.dto.request.CourseRequest;
+import com.ApiCourses.Courses.api.dto.request.used_request.CourseRequest;
 import com.ApiCourses.Courses.api.dto.response.custom_responses.*;
 import com.ApiCourses.Courses.api.dto.response.used_responses.CourseResponse;
 import com.ApiCourses.Courses.domain.entities.*;
@@ -78,6 +78,11 @@ public class CourseService implements ICourseService {
 
         return this.courseRepository.findAll(pagination).map(course -> this.entityToResponse(course));
     }
+
+
+
+
+
     private Course find(Long id){
         return this.courseRepository.findById(id).orElseThrow(()-> new BadRequestException("There are no courses with the id provided"));
     }

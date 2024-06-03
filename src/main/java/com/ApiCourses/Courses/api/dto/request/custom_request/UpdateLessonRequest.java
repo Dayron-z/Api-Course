@@ -1,4 +1,4 @@
-package com.ApiCourses.Courses.api.dto.request;
+package com.ApiCourses.Courses.api.dto.request.custom_request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class LessonRequest {
+public class UpdateLessonRequest {
     @NotBlank(message = "The lesson title cannot be blank.")
     @Size(max = 100, message = "The lesson title must not exceed 100 characters.")
     private String lessonTitle;
@@ -20,6 +20,4 @@ public class LessonRequest {
     @NotBlank(message = "The content cannot be blank.")
     private String content;
 
-    @NotNull(message = "The course ID is required.")
-    private Long courseId;
 }

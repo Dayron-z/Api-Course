@@ -1,7 +1,7 @@
 package com.ApiCourses.Courses.infrastructure.abstract_services;
 
-import com.ApiCourses.Courses.api.dto.request.LessonRequest;
-import com.ApiCourses.Courses.api.dto.request.UpdateLessonRequest;
+import com.ApiCourses.Courses.api.dto.request.used_request.LessonRequest;
+import com.ApiCourses.Courses.api.dto.request.custom_request.UpdateLessonRequest;
 import com.ApiCourses.Courses.api.dto.response.custom_responses.CourseResponseToLessons;
 import com.ApiCourses.Courses.api.dto.response.used_responses.LessonResponse;
 

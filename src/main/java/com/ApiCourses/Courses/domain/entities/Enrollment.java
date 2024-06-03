@@ -20,7 +20,7 @@ public class Enrollment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private LocalDateTime enrollmentDate;
+    private LocalDateTime enrollmentDate = LocalDateTime.now();
 
 
     @ManyToOne(fetch = FetchType.LAZY)
