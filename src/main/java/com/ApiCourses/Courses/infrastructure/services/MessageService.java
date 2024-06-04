@@ -86,10 +86,13 @@ public class MessageService implements IMessageService {
         var sender = new UserBasicResponse();
         var receiver = new UserBasicResponse();
         var course = new CourseBasicResponseToSpecificResponse();
+        var instructor = new UserBasicResponse();
 
         BeanUtils.copyProperties(message.getSender(), sender);
         BeanUtils.copyProperties(message.getReceiver(), receiver);
         BeanUtils.copyProperties(message.getCourse(), course);
+        BeanUtils.copyProperties(message.getCourse().getUser(), instructor);
+        course.setInstructor(instructor);
 
         return MessageResponse.builder()
                 .message(message.getMessage())
