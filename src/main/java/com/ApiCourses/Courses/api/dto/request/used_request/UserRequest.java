@@ -1,6 +1,8 @@
 package com.ApiCourses.Courses.api.dto.request.used_request;
 
 import com.ApiCourses.Courses.utils.enums.Role;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -35,5 +37,4 @@ public class UserRequest {
 
     @NotNull(message = "Role is required.")
     private Role role;
-
 }

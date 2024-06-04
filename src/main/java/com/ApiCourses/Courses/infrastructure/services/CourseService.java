@@ -8,6 +8,7 @@ import com.ApiCourses.Courses.domain.entities.*;
 import com.ApiCourses.Courses.domain.repositories.CourseRepository;
 import com.ApiCourses.Courses.domain.repositories.UserRepository;
 import com.ApiCourses.Courses.infrastructure.abstract_services.ICourseService;
+import com.ApiCourses.Courses.utils.enums.Role;
 import com.ApiCourses.Courses.utils.enums.SortType;
 import com.ApiCourses.Courses.utils.exceptions.BadRequestException;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,6 +34,14 @@ public class CourseService implements ICourseService {
     @Override
     public CourseResponse create(CourseRequest request) {
         Course course = this.requestToEntity(request);
+
+        UserEntity user = this.userRepository.findById(request.getInstructorId()).orElseThrow(()-> new BadRequestException("There are no users with the id provided"));
+
+        if (user.getRole() != Role.INSTRUCTOR){
+            throw new BadRequestException("The courses can only be created with an instructor.");
+        }
+
+
         course.setLessons(new ArrayList<>());
         course.setEnrollments(new ArrayList<>());
         course.setMessages(new ArrayList<>());
@@ -78,10 +88,6 @@ public class CourseService implements ICourseService {
 
         return this.courseRepository.findAll(pagination).map(course -> this.entityToResponse(course));
     }
-
-
-
-
 
     private Course find(Long id){
         return this.courseRepository.findById(id).orElseThrow(()-> new BadRequestException("There are no courses with the id provided"));

@@ -26,6 +26,7 @@ public class UserEntity {
     @Column(nullable = false, length = 100)
     private String fullName;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Role role;
 
 
