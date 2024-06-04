@@ -15,6 +15,7 @@ import com.ApiCourses.Courses.domain.repositories.CourseRepository;
 import com.ApiCourses.Courses.domain.repositories.EnrollmentRepository;
 import com.ApiCourses.Courses.domain.repositories.UserRepository;
 import com.ApiCourses.Courses.infrastructure.abstract_services.IEnrollmentService;
+import com.ApiCourses.Courses.infrastructure.helpers.EmailHelper;
 import com.ApiCourses.Courses.utils.enums.SortType;
 import com.ApiCourses.Courses.utils.exceptions.BadRequestException;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,8 +36,13 @@ import java.util.stream.Collectors;
 public class EnrollmentService implements IEnrollmentService {
     @Autowired
     private final EnrollmentRepository enrollmentRepository;
+    @Autowired
     private final UserRepository userRepository;
+    @Autowired
     private final CourseRepository courseRepository;
+    @Autowired
+    private final EmailHelper emailHelper;
+
 
 
     @Override
@@ -48,6 +55,14 @@ public class EnrollmentService implements IEnrollmentService {
         enrollment.setUser(user);
         enrollment.setCourse(course);
 
+
+        if (Objects.nonNull(user.getEmail())){
+            this.emailHelper.sendMail(user.getEmail(), user.getFullName(), course.getCourseName(), course.getUser().getFullName());
+            System.out.println("llegdsfkdsjjskohfdsh");
+        }
+
+
+/*        String destinity, String name, String course, String instructor*/
         return this.entityToResponse(this.enrollmentRepository.save(enrollment));
     }
 
