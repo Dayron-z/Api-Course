@@ -3,6 +3,7 @@ package com.ApiCourses.Courses.api.controllers;
 
 import com.ApiCourses.Courses.api.dto.request.used_request.CourseRequest;
 import com.ApiCourses.Courses.api.dto.request.used_request.EnrollmentRequest;
+import com.ApiCourses.Courses.api.dto.response.custom_responses.EnrollmentBasicResponse;
 import com.ApiCourses.Courses.api.dto.response.custom_responses.EnrollmentBasicResponseToUser;
 import com.ApiCourses.Courses.api.dto.response.used_responses.CourseResponse;
 import com.ApiCourses.Courses.api.dto.response.used_responses.EnrollmentResponse;
@@ -42,6 +43,11 @@ public class EnrollmentController {
     @GetMapping(path = "/users/{user_id}/courses")
     public ResponseEntity<List<EnrollmentBasicResponseToUser>> findCoursesByUser(@PathVariable("user_id") Long id){
         return ResponseEntity.ok(this.enrollmentService.findByUserId(id));
+    }
+
+    @GetMapping(path = "/courses/{course_id}/users")
+    public ResponseEntity<List<EnrollmentBasicResponse>> findByCourseId(@PathVariable("course_id") Long id){
+        return ResponseEntity.ok(this.enrollmentService.findByCourseId(id));
     }
 
 

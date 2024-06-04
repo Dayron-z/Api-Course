@@ -3,6 +3,7 @@ package com.ApiCourses.Courses.infrastructure.services;
 
 import com.ApiCourses.Courses.api.dto.request.used_request.EnrollmentRequest;
 import com.ApiCourses.Courses.api.dto.response.custom_responses.CourseBasicResponseToSpecificResponse;
+import com.ApiCourses.Courses.api.dto.response.custom_responses.EnrollmentBasicResponse;
 import com.ApiCourses.Courses.api.dto.response.custom_responses.EnrollmentBasicResponseToUser;
 import com.ApiCourses.Courses.api.dto.response.custom_responses.UserBasicResponse;
 import com.ApiCourses.Courses.api.dto.response.used_responses.CourseResponse;
@@ -108,6 +109,24 @@ public class EnrollmentService implements IEnrollmentService {
     @Override
     public List<EnrollmentBasicResponseToUser> findByUserId(Long id) {
         return this.enrollmentRepository.findByUserId(id).stream().map(enrollment -> this.enrollmentToBasicResponse(enrollment)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<EnrollmentBasicResponse> findByCourseId(Long courseId) {
+        return this.enrollmentRepository.findByCourseId(courseId).stream().map(enrollment -> this.enrollmentBasic(enrollment)).collect(Collectors.toList());
+    }
+
+
+    private EnrollmentBasicResponse enrollmentBasic(Enrollment enrollment){
+        var user = new UserBasicResponse();
+        BeanUtils.copyProperties(enrollment.getUser(), user);
+
+
+        return EnrollmentBasicResponse.builder()
+                .id(enrollment.getId())
+                .enrollmentDate(enrollment.getEnrollmentDate())
+                .user(user)
+                .build();
     }
 
     private EnrollmentBasicResponseToUser enrollmentToBasicResponse(Enrollment enrollment){
