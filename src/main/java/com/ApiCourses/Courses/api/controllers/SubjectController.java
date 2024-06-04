@@ -28,7 +28,6 @@ import java.util.Objects;
 public class SubjectController {
     @Autowired
     private final ISubjectService iSubjectService;
-
     @Operation(
             summary = "Obtener todos los temas",
             description = "Obtiene una lista paginada de todos los temas disponibles",
