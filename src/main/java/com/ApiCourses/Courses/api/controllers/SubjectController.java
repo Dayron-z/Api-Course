@@ -56,9 +56,4 @@ public class SubjectController {
         return ResponseEntity.ok(this.iSubjectService.customUpdate(subjectRequest, id));
     }
 
-
-
-
-
-
 }
