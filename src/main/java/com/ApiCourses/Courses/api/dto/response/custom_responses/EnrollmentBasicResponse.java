@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -15,6 +16,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class EnrollmentBasicResponse {
     private Long id;
-    private LocalDateTime enrollmentDate;
+    private LocalDate enrollmentDate;
     private UserBasicResponse user;
 }
