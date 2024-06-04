@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class UserService implements IUserService {
-
     @Autowired
     private  final UserRepository userRepository;
     @Override
@@ -170,5 +169,4 @@ public class UserService implements IUserService {
 
 
     }
-
 }
